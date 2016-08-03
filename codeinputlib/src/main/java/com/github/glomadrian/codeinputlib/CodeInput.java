@@ -233,6 +233,7 @@ public class CodeInput extends View {
   @Override public boolean onKeyDown(int keyCode, KeyEvent keyevent) {
     if (keyCode == KeyEvent.KEYCODE_DEL && characters.size() != 0) {
       characters.pop();
+      invalidate();
     }
     return super.onKeyDown(keyCode, keyevent);
   }
@@ -246,6 +247,7 @@ public class CodeInput extends View {
     if (matcher.matches()) {
       char character = matcher.group(1).charAt(0);
       characters.push(character);
+      invalidate();
       if (characters.size() >=underlineAmount){
         if(listener!=null) {
           listener.onCodeReady(getCode());
