@@ -287,7 +287,6 @@ public class CodeInput extends View {
     if (hintText != null) {
       drawHint(canvas);
     }
-    invalidate();
   }
 
   private void drawSection(int position, float fromX, float fromY, float toX, float toY,
@@ -320,8 +319,8 @@ public class CodeInput extends View {
   private class ReductionAnimatorListener implements ValueAnimator.AnimatorUpdateListener {
 
     public void onAnimationUpdate(ValueAnimator valueanimator) {
-      float value = ((Float) valueanimator.getAnimatedValue()).floatValue();
-      reduction = value;
+      reduction = (float) valueanimator.getAnimatedValue();
+      invalidate();
     }
   }
 
@@ -332,6 +331,7 @@ public class CodeInput extends View {
 
     @Override public void onAnimationUpdate(ValueAnimator animation) {
       hintActualMarginBottom = (float) animation.getAnimatedValue();
+      invalidate();
     }
   }
 
@@ -343,6 +343,7 @@ public class CodeInput extends View {
     @Override public void onAnimationUpdate(ValueAnimator animation) {
       float size = (float) animation.getAnimatedValue();
       hintPaint.setTextSize(size);
+      invalidate();
     }
   }
 }
